@@ -26,6 +26,7 @@ class CoreAsset extends BaseAssetBundle
       'global/plugins/simple-line-icons/simple-line-icons.min.css',
         // 'global/plugins/bootstrap/css/bootstrap.min.css',
       'global/plugins/bootstrap-switch/css/bootstrap-switch.min.css',
+      'global/css/components-md.css',
     ];
 
     /**
