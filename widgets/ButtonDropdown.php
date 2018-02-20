@@ -38,7 +38,8 @@ use yii\helpers\Html;
  * ```
  *
  * */
-class ButtonDropdown extends \yii\bootstrap\ButtonDropdown {
+class ButtonDropdown extends \yii\bootstrap\ButtonDropdown
+{
 
     /**
      * @var array The configuration array for [[Button]].
@@ -59,13 +60,11 @@ class ButtonDropdown extends \yii\bootstrap\ButtonDropdown {
 
         $this->options['data-toggle'] = 'dropdown';
 
-        if ($this->hover === true)
-        {
+        if ($this->hover === true) {
             $this->options['data-hover'] = 'dropdown';
         }
 
-        if ($this->encodeLabel)
-        {
+        if ($this->encodeLabel) {
             $this->label = Html::encode($this->label);
         }
 
@@ -81,47 +80,47 @@ class ButtonDropdown extends \yii\bootstrap\ButtonDropdown {
      */
     public function run()
     {
-        echo Html::tag('div', sprintf('%s%s', $this->renderButton(), $this->renderDropdown()), ['class' => 'btn-group']);
+        echo Html::tag('div',
+          sprintf('%s%s', $this->renderButton(), $this->renderDropdown()),
+          ['class' => 'btn-group']);
     }
 
     /**
      * Renders the button.
+     *
      * @return string the rendering result
      */
     protected function renderButton()
     {
-        $label = Html::tag('span', $this->label, ['class' => 'hidden-sm hidden-xs']);
+        $label = Html::tag('span', $this->label,
+          ['class' => 'hidden-sm hidden-xs']);
 
-        if ($this->split)
-        {
+        if ($this->split) {
             $leftBtn = Button::widget($a = ArrayHelper::merge($this->button, [
-                                'label' => $label,
-                                'encodeLabel' => false,
-                                'tagName' => $this->tagName,
+              'label'       => $label,
+              'encodeLabel' => false,
+              'tagName'     => $this->tagName,
             ]));
 
 
             $rightBtn = Button::widget(ArrayHelper::merge($this->button, [
-                                'label' => '<i class="fa fa-angle-down"></i>',
-                                'encodeLabel' => false,
-                                'options' => $this->options,
-                                'tagName' => $this->tagName,
+              'label'       => '<i class="fa fa-angle-down"></i>',
+              'encodeLabel' => false,
+              'options'     => $this->options,
+              'tagName'     => $this->tagName,
             ]));
-        }
-        else
-        {
+        } else {
             $label .= ' <i class="fa fa-angle-down"></i>';
 
-            if (!isset($this->options['href']))
-            {
+            if (!isset($this->options['href'])) {
                 $this->options['href'] = '#';
             }
 
             $leftBtn = Button::widget(ArrayHelper::merge($this->button, [
-                                'label' => $label,
-                                'encodeLabel' => false,
-                                'options' => $this->options,
-                                'tagName' => $this->tagName,
+              'label'       => $label,
+              'encodeLabel' => false,
+              'options'     => $this->options,
+              'tagName'     => $this->tagName,
             ]));
 
             $rightBtn = '';
@@ -132,6 +131,7 @@ class ButtonDropdown extends \yii\bootstrap\ButtonDropdown {
 
     /**
      * Renders the dropdown
+     *
      * @return string the rendering result
      */
     protected function renderDropdown()

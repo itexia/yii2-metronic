@@ -8,7 +8,8 @@ namespace dlds\metronic\builders;
 
 use yii\helpers\Html;
 
-class TreeBuilder {
+class TreeBuilder
+{
 
     /**
      * @var string items level attribute
@@ -53,13 +54,14 @@ class TreeBuilder {
     /**
      * @var array given items to traverse
      */
-    private $_items = array();
+    private $_items = [];
 
     /**
      * Private constructor
+     *
      * @param array $items
      */
-    private function __construct($items, $params = array())
+    private function __construct($items, $params = [])
     {
         $this->_items = $items;
 
@@ -68,9 +70,10 @@ class TreeBuilder {
 
     /**
      * Retrieves new instance of MTreeBuilder
+     *
      * @param array $items given items to traverse
      */
-    public static function instance($items, $params = array())
+    public static function instance($items, $params = [])
     {
         return new self($items, $params);
     }
@@ -85,19 +88,20 @@ class TreeBuilder {
 
     /**
      * Sets class params
+     *
      * @param array $params given params
+     *
      * @throws Exception if param does not exists
      */
     public function setParams($params)
     {
-        foreach ($params as $param => $value)
-        {
-            if (!property_exists($this, $param))
-            {
-                throw new Exception(Yii::t('app', 'Class {class} has no param called "{param}."', array(
+        foreach ($params as $param => $value) {
+            if (!property_exists($this, $param)) {
+                throw new Exception(Yii::t('app',
+                  'Class {class} has no param called "{param}."', [
                     '{class}' => get_class($this),
-                    '{param}' => $param
-                )));
+                    '{param}' => $param,
+                  ]));
             }
 
             $this->{$param} = $value;
@@ -106,6 +110,7 @@ class TreeBuilder {
 
     /**
      * Renders tree
+     *
      * @return string html
      */
     protected function renderTree()
@@ -114,46 +119,39 @@ class TreeBuilder {
 
         $level = -1;
 
-        foreach ($this->_items as $model)
-        {
-            if (is_array($model)){
-              $model = (object) $model;
+        foreach ($this->_items as $model) {
+            if (is_array($model)) {
+                $model = (object)$model;
             }
 
-            if ($model->{$this->levelAttr} == $level)
-            {
+            if ($model->{$this->levelAttr} == $level) {
                 $html .= $this->renderItemClose();
-            }
-            else if ($model->{$this->levelAttr} > $level)
-            {
-                $html .= $this->renderTreeOpen();
-            }
-            else
-            {
-                $html .= $this->renderItemClose();
-
-                for ($i = $level - $model->{$this->levelAttr}; $i; $i--)
-                {
-                    $html .= $this->renderTreeClose();
-
+            } else {
+                if ($model->{$this->levelAttr} > $level) {
+                    $html .= $this->renderTreeOpen();
+                } else {
                     $html .= $this->renderItemClose();
+
+                    for ($i = $level - $model->{$this->levelAttr}; $i; $i--) {
+                        $html .= $this->renderTreeClose();
+
+                        $html .= $this->renderItemClose();
+                    }
                 }
             }
 
             $html .= $this->renderItemOpen($model->primaryKey);
 
-            $html .= Html::tag('i','', [
-              'class' => 'jstree-icon jstree-ocl',
-              'role' => 'presentation'
+            $html .= Html::tag('i', '', [
+                'class' => 'jstree-icon jstree-ocl',
+                'role'  => 'presentation',
               ]
             );
 
-            if (is_callable($this->contentCallback))
-            {
-                $html .= $this->renderContent(call_user_func($this->contentCallback, $model, $level));
-            }
-            else
-            {
+            if (is_callable($this->contentCallback)) {
+                $html .= $this->renderContent(call_user_func($this->contentCallback,
+                  $model, $level));
+            } else {
                 $html .= $this->renderContent($model);
             }
 
@@ -161,8 +159,7 @@ class TreeBuilder {
             $level = $model->{$this->levelAttr};
         }
 
-        for ($i = $level; $i; $i--)
-        {
+        for ($i = $level; $i; $i--) {
             $html .= $this->renderItemClose();
             $html .= $this->renderTreeClose();
         }
@@ -172,6 +169,7 @@ class TreeBuilder {
 
     /**
      * Renders tree open tag
+     *
      * @return string html
      */
     protected function renderTreeOpen()
@@ -183,6 +181,7 @@ class TreeBuilder {
 
     /**
      * Renders item open tag
+     *
      * @return string html
      */
     protected function renderItemOpen($id)
@@ -197,8 +196,7 @@ class TreeBuilder {
      */
     protected function renderContent($content)
     {
-        if ($this->contentTag)
-        {
+        if ($this->contentTag) {
             $options = $this->getHtmlOptions($this->contentHtmlOptions);
 
             return Html::tag($this->contentTag, $options, $content);
@@ -209,6 +207,7 @@ class TreeBuilder {
 
     /**
      * Renders item close tag
+     *
      * @return string html
      */
     protected function renderItemClose()
@@ -218,6 +217,7 @@ class TreeBuilder {
 
     /**
      * Renders tree close tag
+     *
      * @return string html
      */
     protected function renderTreeClose()
@@ -227,15 +227,15 @@ class TreeBuilder {
 
     /**
      * Retrieves html options for given property
+     *
      * @return array html options
      */
     protected function getHtmlOptions($property, $attr = null)
     {
-        if (is_callable($property))
-        {
-            return (array) $property->__invoke($attr);
+        if (is_callable($property)) {
+            return (array)$property->__invoke($attr);
         }
 
-        return (array) $property;
+        return (array)$property;
     }
 }

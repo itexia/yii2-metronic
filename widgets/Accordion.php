@@ -38,16 +38,21 @@ use yii\helpers\Html;
  */
 class Accordion extends Widget
 {
+
     // Item types
     const ITEM_TYPE_DEFAULT = 'default';
+
     const ITEM_TYPE_SUCCESS = 'success';
+
     const ITEM_TYPE_DANGER = 'danger';
+
     const ITEM_TYPE_WARNING = 'warning';
+
     const ITEM_TYPE_INFO = 'info';
 
     /**
-     * @var array list of groups in the collapse widget. Each array element represents a single
-     * group with the following structure:
+     * @var array list of groups in the collapse widget. Each array element
+     *   represents a single group with the following structure:
      *
      * ```php
      * [
@@ -59,13 +64,15 @@ class Accordion extends Widget
      *     'contentOptions' => [],
      *     // optional, the HTML attributes of the group
      *     'options' => [],
-     *     // optional, the item type. Valid values are 'default', 'success', 'danger', 'warning', 'info'
+     *     // optional, the item type. Valid values are 'default', 'success',
+     *   'danger', 'warning', 'info'
      *     // Determines color of the item.
      *     'type' => '',
      * ]
      * ```
      */
     public $items = [];
+
     /**
      * @var array the default configuration used by item.
      */
@@ -93,6 +100,7 @@ class Accordion extends Widget
 
     /**
      * Renders collapsible items as specified on [[items]].
+     *
      * @return string the rendering result
      * @throws InvalidConfigException.
      */
@@ -109,9 +117,12 @@ class Accordion extends Widget
             }
 
             $options = ArrayHelper::getValue($item, 'options', []);
-            $type = ArrayHelper::getValue($item, 'type', self::ITEM_TYPE_DEFAULT);
+            $type = ArrayHelper::getValue($item, 'type',
+              self::ITEM_TYPE_DEFAULT);
             Html::addCssClass($options, 'panel panel-' . $type);
-            $items[] = Html::tag('div', $this->renderItem(array_merge($this->itemConfig, $item), ++$index), $options);
+            $items[] = Html::tag('div',
+              $this->renderItem(array_merge($this->itemConfig, $item),
+                ++$index), $options);
         }
 
         return implode("\n", $items);
@@ -119,8 +130,11 @@ class Accordion extends Widget
 
     /**
      * Renders a single collapsible item group
+     *
      * @param array $item a single item from [[items]]
-     * @param integer $index the item index as each item group content must have an id
+     * @param integer $index the item index as each item group content must
+     *   have an id
+     *
      * @return string the rendering result
      * @throws InvalidConfigException
      */
@@ -142,17 +156,18 @@ class Accordion extends Widget
             }
         }
         $headerToggle = Html::a(
-                $item['header'],
-                '#' . $id,
-                [
-                    'class' => 'accordion-toggle ' . $styled,
-                    'data-toggle' => 'collapse',
-                    'data-parent' => '#' . $this->options['id']
-                ]
-            ) . "\n";
+            $item['header'],
+            '#' . $id,
+            [
+              'class'       => 'accordion-toggle ' . $styled,
+              'data-toggle' => 'collapse',
+              'data-parent' => '#' . $this->options['id'],
+            ]
+          ) . "\n";
 
         $header = Html::tag('h4', $headerToggle, ['class' => 'panel-title']);
-        $content = Html::tag('div', $item['content'], ['class' => 'panel-body']) . "\n";
+        $content = Html::tag('div', $item['content'],
+            ['class' => 'panel-body']) . "\n";
 
         $group = [];
         $group[] = Html::tag('div', $header, ['class' => 'panel-heading']);

@@ -1,4 +1,5 @@
 <?php
+
 namespace dlds\metronic\widgets;
 
 use yii\bootstrap\Html;
@@ -7,6 +8,7 @@ use yii\helpers\ArrayHelper;
 
 class StepsLine extends Widget
 {
+
     public $cssRowClasses = 'step-default';
 
     public $cssItemTitleClasses = 'uppercase font-grey-cascade';
@@ -22,7 +24,8 @@ class StepsLine extends Widget
      * represents a single item with the following structure:
      *
      * - itemTitle: string, required, the group header label.
-     * - itemContent: array|string|object, required, the content (HTML) of the item
+     * - itemContent: array|string|object, required, the content (HTML) of the
+     *   item
      * - itemIcon: string, optional
      * - itemActive: string, optional (default: item is not active)
      * - itemDone: string, optional (default: item is not done)
@@ -40,6 +43,7 @@ class StepsLine extends Widget
     {
         parent::init();
     }
+
     /**
      * @inheritdoc
      */
@@ -47,16 +51,17 @@ class StepsLine extends Widget
     {
         StepsLineBundle::register($this->view);
         return implode("\n", [
-            Html::beginTag('div', ['class' => 'mt-element-step']),
-            Html::beginTag('div', ['class' => "row {$this->cssRowClasses}"]),
-            $this->renderItems(),
-            Html::endTag('div'),
-            Html::endTag('div')
+          Html::beginTag('div', ['class' => 'mt-element-step']),
+          Html::beginTag('div', ['class' => "row {$this->cssRowClasses}"]),
+          $this->renderItems(),
+          Html::endTag('div'),
+          Html::endTag('div'),
         ]);
     }
 
     /**
      * Renders wizard items as specified on [[items]].
+     *
      * @return string the rendering result.
      * @throws InvalidConfigException.
      */
@@ -66,7 +71,7 @@ class StepsLine extends Widget
         $n = 1;
         $numberOfItems = count($this->items);
 
-        switch ($numberOfItems){
+        switch ($numberOfItems) {
             case 3:
                 $this->cssColClass = 'col-md-4';
                 break;
@@ -75,7 +80,7 @@ class StepsLine extends Widget
                 break;
             default:
                 throw new InvalidConfigException(
-                    "Only three and four steps are supported by this widget. Your actual item count is $numberOfItems"
+                  "Only three and four steps are supported by this widget. Your actual item count is $numberOfItems"
                 );
         }
 
@@ -88,26 +93,26 @@ class StepsLine extends Widget
 
             if (!is_string($key) && !array_key_exists('itemTitle', $item)) {
                 throw new InvalidConfigException(
-                    "The 'itemTitle' option is required."
+                  "The 'itemTitle' option is required."
                 );
             }
             if (is_string($item)) {
                 $item = ['content' => $item];
             }
 
-            if (!array_key_exists('itemIcon', $item)){
+            if (!array_key_exists('itemIcon', $item)) {
                 $item['itemIcon'] = $n;
             }
 
-            if (!array_key_exists('itemContent', $item)){
+            if (!array_key_exists('itemContent', $item)) {
                 $item['itemContent'] = '';
             }
 
-            if (array_key_exists('itemUrl', $item) && empty($item['itemUrl'])){
+            if (array_key_exists('itemUrl', $item) && empty($item['itemUrl'])) {
                 unset($item['itemUrl']);
             }
 
-            switch ($n){
+            switch ($n) {
                 case 1:
                     $itemCssColClass .= ' first';
                     break;
@@ -119,11 +124,11 @@ class StepsLine extends Widget
 
             }
 
-            if (array_key_exists('itemActive', $item)){
+            if (array_key_exists('itemActive', $item)) {
                 $itemCssColClass .= ' ' . $item['itemActive'];
             }
 
-            if (array_key_exists('itemDone', $item)){
+            if (array_key_exists('itemDone', $item)) {
                 $itemCssColClass .= ' ' . $item['itemDone'];
             }
 
@@ -137,22 +142,26 @@ class StepsLine extends Widget
         return implode("\n", $contents);
     }
 
-    private function renderItem($item = []){
+    private function renderItem($item = [])
+    {
         $lines = [];
 
         $lines[] = Html::beginTag('div', [
-            'class' => "{$item['cssClassesCol']} mt-step-col"
+          'class' => "{$item['cssClassesCol']} mt-step-col",
         ]);
 
-        $iconTag = Html::tag('div', $item['itemIcon'], ['class' => "mt-step-number {$this->cssItemIconClasses}"]);
+        $iconTag = Html::tag('div', $item['itemIcon'],
+          ['class' => "mt-step-number {$this->cssItemIconClasses}"]);
 
-        if (isset($item['itemUrl'])){
+        if (isset($item['itemUrl'])) {
             $iconTag = Html::a($iconTag, $item['itemUrl']);
         }
-        
+
         $lines[] = $iconTag;
-        $lines[] = Html::tag('div', $item['itemTitle'], ['class' => "mt-step-title {$this->cssItemTitleClasses}"]);
-        $lines[] = Html::tag('div', $item['itemContent'], ['class' => "mt-step-content {$this->cssItemContentClasses}"]);
+        $lines[] = Html::tag('div', $item['itemTitle'],
+          ['class' => "mt-step-title {$this->cssItemTitleClasses}"]);
+        $lines[] = Html::tag('div', $item['itemContent'],
+          ['class' => "mt-step-content {$this->cssItemContentClasses}"]);
         $lines[] = Html::endTag('div');
 
         return implode("\n", $lines);

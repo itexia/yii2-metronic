@@ -24,15 +24,19 @@ use yii\helpers\Html;
  */
 class DropdownContent extends ButtonDropdown
 {
+
     /**
      * @var string the button label
      */
     public $label = 'Button';
+
     /**
      * @var array the HTML attributes of the button.
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     * @see \yii\helpers\Html::renderTagAttributes() for details on how
+     *   attributes are being rendered.
      */
     public $options = [];
+
     /**
      * @var string the dropdown content.
      */
@@ -53,6 +57,7 @@ class DropdownContent extends ButtonDropdown
 
     /**
      * Generates the button dropdown.
+     *
      * @return string the rendering result.
      */
     protected function renderButton()
@@ -67,10 +72,10 @@ class DropdownContent extends ButtonDropdown
             $this->options['data-toggle'] = 'dropdown';
             Html::addCssClass($this->options, 'dropdown-toggle');
             $splitButton = BButton::widget([
-                'label' => '<span class="caret"></span>',
-                'encodeLabel' => false,
-                'options' => $this->options,
-                'view' => $this->getView(),
+              'label'       => '<span class="caret"></span>',
+              'encodeLabel' => false,
+              'options'     => $this->options,
+              'view'        => $this->getView(),
             ]);
         } else {
             $label .= ' <span class="caret"></span>';
@@ -84,16 +89,17 @@ class DropdownContent extends ButtonDropdown
         }
 
         return BButton::widget([
-            'tagName' => $this->tagName,
-            'label' => $label,
-            'options' => $options,
+            'tagName'     => $this->tagName,
+            'label'       => $label,
+            'options'     => $options,
             'encodeLabel' => false,
-            'view' => $this->getView(),
-        ]) . "\n" . $splitButton;
+            'view'        => $this->getView(),
+          ]) . "\n" . $splitButton;
     }
 
     /**
      * Gets dropdown content.
+     *
      * @return string the rendering result.
      */
     protected function renderDropdown()

@@ -33,15 +33,19 @@ use dlds\metronic\bundles\IonRangeSliderAsset;
  *     ],
  * ]);
  * ```
+ *
  * @see https://github.com/IonDen/ion.rangeSlider
  */
-class IonRangeSlider extends InputWidget {
+class IonRangeSlider extends InputWidget
+{
 
     /**
      * Types
      */
     const TYPE_SINGLE = 'single';
+
     const TYPE_DOUBLE = 'double';
+
     /**
      * @var string separator values
      */
@@ -52,23 +56,20 @@ class IonRangeSlider extends InputWidget {
      */
     public function run()
     {
-        if ($this->hasModel())
-        {
-            $values = explode($this->separator, $this->model->{$this->attribute});
-            if (count($values) == 2)
-            {
-                $this->clientOptions['from'] = (int) $values[0];
-                $this->clientOptions['to'] = (int) $values[1];
+        if ($this->hasModel()) {
+            $values = explode($this->separator,
+              $this->model->{$this->attribute});
+            if (count($values) == 2) {
+                $this->clientOptions['from'] = (int)$values[0];
+                $this->clientOptions['to'] = (int)$values[1];
             }
-            echo Html::activeTextInput($this->model, $this->attribute, $this->options);
-        }
-        else
-        {
+            echo Html::activeTextInput($this->model, $this->attribute,
+              $this->options);
+        } else {
             $values = explode($this->separator, $this->value);
-            if (count($values) == 2)
-            {
-                $this->clientOptions['from'] = (int) $values[0];
-                $this->clientOptions['to'] = (int) $values[1];
+            if (count($values) == 2) {
+                $this->clientOptions['from'] = (int)$values[0];
+                $this->clientOptions['to'] = (int)$values[1];
             }
             echo Html::textInput($this->name, $this->value, $this->options);
         }

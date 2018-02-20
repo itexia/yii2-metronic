@@ -27,22 +27,29 @@ use dlds\metronic\bundles\Select2Asset;
  */
 class Select2 extends InputWidget
 {
+
     /**
-     * @var bool indicates whether to display a dropdown select box or use it for tagging
+     * @var bool indicates whether to display a dropdown select box or use it
+     *   for tagging
      */
     public $asDropdownList = true;
+
     /**
      * @var bool indicates whether the select2 is disabled or not.
      */
     public $disabled = false;
+
     /**
-     * @var array the option data items. The array keys are option values, and the array values
-     * are the corresponding option labels. The array can also be nested (i.e. some array values are arrays too).
-     * For each sub-array, an option group will be generated whose label is the key associated with the sub-array.
-     * If you have a list of data models, you may convert them into the format described above using
+     * @var array the option data items. The array keys are option values, and
+     *   the array values are the corresponding option labels. The array can
+     *   also be nested (i.e. some array values are arrays too). For each
+     *   sub-array, an option group will be generated whose label is the key
+     *   associated with the sub-array. If you have a list of data models, you
+     *   may convert them into the format described above using
      * [[\yii\helpers\ArrayHelper::map()]].
      */
     public $data = [];
+
     /**
      * @var bool indicates whether the select2 is multiple or not.
      */
@@ -70,21 +77,25 @@ class Select2 extends InputWidget
     {
         if ($this->hasModel()) {
             if ($this->asDropdownList) {
-                echo Html::activeDropDownList($this->model, $this->attribute, $this->data, $this->options);
+                echo Html::activeDropDownList($this->model, $this->attribute,
+                  $this->data, $this->options);
             } else {
                 if (!isset($this->clientOptions['query']) && !isset($this->clientOptions['ajax']) && !isset($this->clientOptions['data'])) {
                     throw new InvalidConfigException('Must be set at least one of the client options: query, data, ajax.');
                 }
-                echo Html::activeHiddenInput($this->model, $this->attribute, $this->options);
+                echo Html::activeHiddenInput($this->model, $this->attribute,
+                  $this->options);
             }
         } else {
             if ($this->asDropdownList) {
-                echo Html::dropDownList($this->name, $this->value, $this->data, $this->options);
+                echo Html::dropDownList($this->name, $this->value, $this->data,
+                  $this->options);
             } else {
                 if (!isset($this->clientOptions['query']) && !isset($this->clientOptions['ajax']) && !isset($this->clientOptions['data'])) {
                     throw new InvalidConfigException('Must be set at least one of the options Select2: query, data, ajax.');
                 }
-                echo Html::hiddenInput($this->name, $this->value, $this->options);
+                echo Html::hiddenInput($this->name, $this->value,
+                  $this->options);
             }
         }
         Select2Asset::register($this->view);

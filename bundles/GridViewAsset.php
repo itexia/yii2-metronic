@@ -7,13 +7,14 @@
 
 namespace dlds\metronic\bundles;
 
-class GridViewAsset extends BaseAssetBundle {
+class GridViewAsset extends BaseAssetBundle
+{
 
     /**
      * @var array CSS
      */
     public $css = [
-        'global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
+      'global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
     ];
 
 }

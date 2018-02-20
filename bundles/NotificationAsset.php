@@ -4,7 +4,7 @@
  * @license http://www.digitaldeals.cz/license/
  */
 
-namespace  dlds\metronic\bundles;
+namespace dlds\metronic\bundles;
 
 
 /**
@@ -14,14 +14,14 @@ class NotificationAsset extends BaseAssetBundle
 {
 
     public $js = [
-        'global/plugins/bootstrap-toastr/toastr.min.js',
+      'global/plugins/bootstrap-toastr/toastr.min.js',
     ];
 
     public $css = [
-        'global/plugins/bootstrap-toastr/toastr.min.css',
+      'global/plugins/bootstrap-toastr/toastr.min.css',
     ];
 
     public $depends = [
-        'dlds\metronic\bundles\CoreAsset',
+      'dlds\metronic\bundles\CoreAsset',
     ];
 }

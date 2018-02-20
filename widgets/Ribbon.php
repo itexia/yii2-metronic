@@ -15,13 +15,19 @@ use yii\helpers\Html;
  * @author icron.org <bruno@brunosalzano.com>
  * @since 1.1
  */
-class Ribbon extends Widget {
+class Ribbon extends Widget
+{
 
     const TYPE_DEFAULT = 'ribbon-color-default';
+
     const TYPE_PRIMARY = 'ribbon-color-primary';
+
     const TYPE_INFO = 'ribbon-color-info';
+
     const TYPE_SUCCESS = 'ribbon-color-success';
+
     const TYPE_DANGER = 'ribbon-color-danger';
+
     const TYPE_WARNING = 'ribbon-color-warning';
 
     public $vertical = false;
@@ -60,10 +66,11 @@ class Ribbon extends Widget {
         Html::addCssClass($this->options, $this->color);
 
         if ($this->vertical) {
-            Html::addCssClass($this->options, ($this->right ? 'ribbon-vertical-right' : 'ribbon-vertical-left'));
+            Html::addCssClass($this->options,
+              ($this->right ? 'ribbon-vertical-right' : 'ribbon-vertical-left'));
         } else {
             if ($this->right) {
-                Html::addCssClass($this->options,  'ribbon-right');
+                Html::addCssClass($this->options, 'ribbon-right');
             }
         }
 
@@ -79,9 +86,11 @@ class Ribbon extends Widget {
         } else {
             if ($this->bordered) {
                 if ($this->vertical) {
-                    Html::addCssClass($this->options, $this->dashed ? 'ribbon-border-dash-ver' : 'ribbon-border-ver');
+                    Html::addCssClass($this->options,
+                      $this->dashed ? 'ribbon-border-dash-ver' : 'ribbon-border-ver');
                 } else {
-                    Html::addCssClass($this->options, $this->dashed ? 'ribbon-border-dash-hor' : 'ribbon-border-hor');
+                    Html::addCssClass($this->options,
+                      $this->dashed ? 'ribbon-border-dash-hor' : 'ribbon-border-hor');
                 }
             }
         }
@@ -98,23 +107,25 @@ class Ribbon extends Widget {
         echo Html::tag('div', $content, $this->options);
     }
 
-    private function _renderSub() {
+    private function _renderSub()
+    {
         if ($this->clipped) {
-            return Html::tag('div', '', ['class'=>'ribbon-sub ribbon-clip']);
+            return Html::tag('div', '', ['class' => 'ribbon-sub ribbon-clip']);
         }
         if ($this->bookmark) {
-            return Html::tag('div', '', ['class'=>'ribbon-sub ribbon-bookmark']);
+            return Html::tag('div', '',
+              ['class' => 'ribbon-sub ribbon-bookmark']);
         }
     }
 
-    private function _renderTitle() {
+    private function _renderTitle()
+    {
         $html = '';
-        if ($this->icon)
-        {
+        if ($this->icon) {
             $html .= Html::tag('i', '', ['class' => $this->icon]);
             $html .= '&nbsp;';
         }
-        $html.= Html::tag('span', $this->title);
+        $html .= Html::tag('span', $this->title);
         return $html;
     }
 }

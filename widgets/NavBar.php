@@ -37,7 +37,8 @@ use Yii;
  *
  * @see http://twitter.github.io/bootstrap/components.html#navbar
  */
-class NavBar extends \yii\bootstrap\NavBar {
+class NavBar extends \yii\bootstrap\NavBar
+{
 
     /**
      * @var string the url to logo of the brand.
@@ -48,14 +49,13 @@ class NavBar extends \yii\bootstrap\NavBar {
      * @var string the url to logo of the brand.
      */
     public $brandWrapperOptions;
-    
+
     /**
      * Initializes the widget.
      */
     public function init()
     {
-        if (!isset($this->options['id']))
-        {
+        if (!isset($this->options['id'])) {
             $this->options['id'] = $this->getId();
         }
 
@@ -80,25 +80,26 @@ class NavBar extends \yii\bootstrap\NavBar {
 
     /**
      * Renders toggle button
+     *
      * @return string the rendering result
      */
     protected function renderToggleButton()
     {
-        return Html::tag('div', '', ['class' => 'menu-toggler sidebar-toggler']);
+        return Html::tag('div', '',
+          ['class' => 'menu-toggler sidebar-toggler']);
     }
 
     /**
      * Renders Brand
+     *
      * @return string the rendering result
      */
     protected function renderBrand()
     {
-        if ($this->brandLogoUrl)
-        {
-            $content = Html::img($this->brandLogoUrl, ['class' => 'logo-default', 'alt' => $this->brandLabel]);
-        }
-        else
-        {
+        if ($this->brandLogoUrl) {
+            $content = Html::img($this->brandLogoUrl,
+              ['class' => 'logo-default', 'alt' => $this->brandLabel]);
+        } else {
             $content = $this->brandLabel;
         }
 

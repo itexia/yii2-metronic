@@ -35,6 +35,7 @@ use yii\helpers\Html;
  */
 class ButtonGroup extends \yii\bootstrap\ButtonGroup
 {
+
     /**
      * @var bool Indicates whether the button group appears vertically stacked.
      */

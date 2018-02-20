@@ -35,11 +35,13 @@ use yii\helpers\Html;
  *     'footer' => ['label' => 'Show all', 'url' => '#'],
  *   ],
  *   'clientOptions' => [
- *     'loadSuccess' => new \yii\web\JsExpression('function(){ console.log("load success"); }'),
+ *     'loadSuccess' => new \yii\web\JsExpression('function(){
+ * console.log("load success"); }'),
  *     'remote' => '/?r=site/about',
  *   ],
  *   'clientEvents' => [
- *     'close.mr.portlet' => 'function(e) { console.log("portlet closed"); e.preventDefault(); }'
+ *     'close.mr.portlet' => 'function(e) { console.log("portlet closed");
+ * e.preventDefault(); }'
  *   ],
  *   'tools' => [
  *     Portlet::TOOL_RELOAD,
@@ -60,14 +62,18 @@ class Portlet extends Widget
      * Types
      */
     const TYPE_LIGHT = 'light';
+
     const TYPE_NONE = '';
 
     /**
      * Tools
      */
     const TOOL_MINIMIZE = 'collapse';
+
     const TOOL_MODAL = 'modal';
+
     const TOOL_RELOAD = 'reload';
+
     const TOOL_CLOSE = 'remove';
 
     /**
@@ -93,7 +99,8 @@ class Portlet extends Widget
 
     /**
      * @var string The portlet color
-     * Valid values are 'light-blue', 'blue', 'red', 'yellow', 'green', 'purple', 'light-grey', 'grey'
+     * Valid values are 'light-blue', 'blue', 'red', 'yellow', 'green',
+     *   'purple', 'light-grey', 'grey'
      */
     public $color = '';
 
@@ -103,7 +110,8 @@ class Portlet extends Widget
     public $background = '';
 
     /**
-     * @var array List of actions, where each element must be specified as a string.
+     * @var array List of actions, where each element must be specified as a
+     *   string.
      */
     public $actions = [];
 
@@ -122,7 +130,8 @@ class Portlet extends Widget
      *   'height' => 150,
      *   // optional, HTML attributes of the scroller
      *   'options' => [],
-     *   // optional, footer of the scroller. May contain string or array(the options of Link component)
+     *   // optional, footer of the scroller. May contain string or array(the
+     *   options of Link component)
      *   'footer' => [
      *     'label' => 'Show all',
      *   ],
@@ -168,14 +177,15 @@ class Portlet extends Widget
     {
         parent::init();
 
-        Html::addCssClass($this->options, trim(sprintf('portlet %s %s', $this->type, $this->background)));
-        if (count($this->ribbons)>0) {
+        Html::addCssClass($this->options,
+          trim(sprintf('portlet %s %s', $this->type, $this->background)));
+        if (count($this->ribbons) > 0) {
             Html::addCssClass($this->options, 'mt-element-ribbon portlet-fit');
         }
         echo Html::beginTag('div', $this->options);
 
 
-        if (count($this->ribbons)>0) {
+        if (count($this->ribbons) > 0) {
             $this->_renderRibbon();
         }
 
@@ -204,7 +214,7 @@ class Portlet extends Widget
     private function _renderRibbon()
     {
         /** @var Ribbon $r */
-        foreach($this->ribbons as $r) {
+        foreach ($this->ribbons as $r) {
             print $r->run();
         }
     }
@@ -222,13 +232,16 @@ class Portlet extends Widget
             echo Html::beginTag('div', ['class' => 'caption']);
 
             if ($this->icon) {
-                echo Html::tag('i', '', ['class' => $this->pushFontColor($this->icon)]);
+                echo Html::tag('i', '',
+                  ['class' => $this->pushFontColor($this->icon)]);
             }
 
-            echo Html::tag($this->tagTitle, $this->title, ['class' => $this->pushFontColor('caption-subject')]);
+            echo Html::tag($this->tagTitle, $this->title,
+              ['class' => $this->pushFontColor('caption-subject')]);
 
             if ($this->helper) {
-                echo Html::tag('span', $this->helper, ['class' => 'caption-helper']);
+                echo Html::tag('span', $this->helper,
+                  ['class' => 'caption-helper']);
             }
 
             echo Html::endTag('div');
@@ -263,7 +276,8 @@ class Portlet extends Widget
                         $class = 'reload';
                         break;
                 }
-                $tools[] = Html::tag('a', '', ['class' => $class, 'href' => '']);
+                $tools[] = Html::tag('a', '',
+                  ['class' => $class, 'href' => '']);
             }
 
             echo Html::tag('div', implode("\n", $tools), ['class' => 'tools']);
@@ -276,12 +290,14 @@ class Portlet extends Widget
     private function _renderActions()
     {
         if (!empty($this->actions)) {
-            echo Html::tag('div', implode("\n", $this->actions), ['class' => 'actions']);
+            echo Html::tag('div', implode("\n", $this->actions),
+              ['class' => 'actions']);
         }
     }
 
     /**
      * Renders scroller begin
+     *
      * @throws InvalidConfigException
      */
     private function _renderScrollerBegin()
@@ -292,9 +308,13 @@ class Portlet extends Widget
             }
             $options = ArrayHelper::getValue($this->scroller, 'options', []);
             echo Html::beginTag(
-                'div', ArrayHelper::merge(
-                    ['class' => 'scroller', 'data-always-visible' => '1', 'data-rail-visible' => '0'], $options, ['style' => 'height:' . $this->scroller['height'] . 'px;']
-                )
+              'div', ArrayHelper::merge(
+              ['class'               => 'scroller',
+               'data-always-visible' => '1',
+               'data-rail-visible'   => '0',
+              ], $options,
+              ['style' => 'height:' . $this->scroller['height'] . 'px;']
+            )
             );
         }
     }
@@ -310,7 +330,8 @@ class Portlet extends Widget
             if (!empty($footer)) {
                 echo Html::beginTag('div', ['class' => 'scroller-footer']);
                 if (is_array($footer)) {
-                    echo Html::tag('div', Link::widget($footer), ['class' => 'pull-right']);
+                    echo Html::tag('div', Link::widget($footer),
+                      ['class' => 'pull-right']);
                 } elseif (is_string($footer)) {
                     echo $footer;
                 }

@@ -9,18 +9,19 @@ namespace dlds\metronic\bundles;
 /**
  * TagInputAsset for tag widget.
  */
-class TagInputAsset extends BaseAssetBundle {
+class TagInputAsset extends BaseAssetBundle
+{
 
     public $js = [
-        'global/plugins/jquery-tags-input/jquery.tagsinput.min.js',
+      'global/plugins/jquery-tags-input/jquery.tagsinput.min.js',
     ];
 
     public $css = [
-        'global/plugins/jquery-tags-input/jquery.tagsinput.css',
+      'global/plugins/jquery-tags-input/jquery.tagsinput.css',
     ];
 
     public $depends = [
-        'dlds\metronic\bundles\CoreAsset',
+      'dlds\metronic\bundles\CoreAsset',
     ];
 
 }

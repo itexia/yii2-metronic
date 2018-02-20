@@ -41,12 +41,16 @@ use yii\helpers\Html;
  * Alert::end();
  * ```
  */
-class Alert extends \yii\bootstrap\Alert {
+class Alert extends \yii\bootstrap\Alert
+{
 
     // type
     const TYPE_SUCCESS = 'success';
+
     const TYPE_INFO = 'info';
+
     const TYPE_WARNING = 'warning';
+
     const TYPE_DANGER = 'danger';
 
     /**
@@ -66,8 +70,7 @@ class Alert extends \yii\bootstrap\Alert {
     public function init()
     {
         Html::addCssClass($this->options, 'alert-' . $this->type);
-        if ($this->block)
-        {
+        if ($this->block) {
             Html::addCssClass($this->options, 'alert-block');
         }
         parent::init();

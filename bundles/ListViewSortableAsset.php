@@ -10,20 +10,21 @@ namespace dlds\metronic\bundles;
 /**
  * SpinnerAsset for spinner widget.
  */
-class ListViewSortableAsset extends BaseAssetBundle {
+class ListViewSortableAsset extends BaseAssetBundle
+{
 
     /**
      * @var array JS
      */
     public $js = [
-        'global/scripts/sortable.listview.js',
+      'global/scripts/sortable.listview.js',
     ];
 
     /**
      * @var array depends
      */
     public $depends = [
-        'yii\jui\JuiAsset',
+      'yii\jui\JuiAsset',
     ];
 
 }

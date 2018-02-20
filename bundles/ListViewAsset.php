@@ -9,13 +9,14 @@ namespace dlds\metronic\bundles;
 
 use yii\web\AssetBundle;
 
-class ListViewAsset extends BaseAssetBundle {
+class ListViewAsset extends BaseAssetBundle
+{
 
     /**
      * @var array CSS
      */
     public $css = [
-        'global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
+      'global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
     ];
 
 }

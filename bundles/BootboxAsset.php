@@ -8,13 +8,15 @@ namespace dlds\metronic\bundles;
 
 use Yii;
 
-class BootboxAsset extends BaseAssetBundle {
+class BootboxAsset extends BaseAssetBundle
+{
+
     public $depends = [
-        'dlds\metronic\bundles\CoreAsset',
+      'dlds\metronic\bundles\CoreAsset',
     ];
 
     public $js = [
-        'global/plugins/bootbox/bootbox.min.js',
+      'global/plugins/bootbox/bootbox.min.js',
     ];
 
     public static function overrideSystemConfirm()

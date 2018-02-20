@@ -11,7 +11,8 @@ use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use dlds\metronic\bundles\GridViewSortableAsset;
 
-class GridView extends \kartik\grid\GridView {
+class GridView extends \kartik\grid\GridView
+{
 
     /**
      * @var string grid view layout
@@ -76,33 +77,30 @@ class GridView extends \kartik\grid\GridView {
     protected function initPager()
     {
         $this->pager['firstPageLabel'] = Html::tag('i', '', [
-                'class' => 'fa fa-angle-double-left',
+          'class' => 'fa fa-angle-double-left',
         ]);
 
         $this->pager['lastPageLabel'] = Html::tag('i', '', [
-                'class' => 'fa fa-angle-double-right',
+          'class' => 'fa fa-angle-double-right',
         ]);
 
         $this->pager['prevPageLabel'] = Html::tag('i', '', [
-                'class' => 'fa fa-angle-left',
+          'class' => 'fa fa-angle-left',
         ]);
 
         $this->pager['nextPageLabel'] = Html::tag('i', '', [
-                'class' => 'fa fa-angle-right',
+          'class' => 'fa fa-angle-right',
         ]);
     }
 
     protected function initVisible()
     {
         $columns = $this->getStorageColumns();
-        if (empty($columns))
-        {
+        if (empty($columns)) {
             return;
         }
-        foreach ($this->columns as $i => $column)
-        {
-            if (array_search($i, $columns) === false)
-            {
+        foreach ($this->columns as $i => $column) {
+            if (array_search($i, $columns) === false) {
                 unset($this->columns[$i]);
             }
         }
@@ -115,11 +113,11 @@ class GridView extends \kartik\grid\GridView {
     {
         $route = ArrayHelper::getValue($this->sortable, 'url', false);
 
-        if ($route)
-        {
+        if ($route) {
             $url = Url::toRoute($route);
 
-            $options = json_encode(ArrayHelper::getValue($this->sortable, 'options', []));
+            $options = json_encode(ArrayHelper::getValue($this->sortable,
+              'options', []));
 
             $view = $this->getView();
             $view->registerJs("jQuery('#{$this->id}').SortableGridView('{$url}', {$options});");

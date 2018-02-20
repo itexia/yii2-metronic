@@ -33,9 +33,9 @@ use yii\helpers\Html;
 class Dropdown extends \yii\bootstrap\Dropdown
 {
 
-     public const LINK_TYPE_LINK = 'a';
+    public const LINK_TYPE_LINK = 'a';
 
-     public const LINK_TYPE_CHECKBOX = 'checkbox';
+    public const LINK_TYPE_CHECKBOX = 'checkbox';
 
     /**
      * @var string the dropdown title

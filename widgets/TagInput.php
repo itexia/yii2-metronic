@@ -20,7 +20,8 @@ use dlds\metronic\bundles\TagInputAsset;
  * or a name and a value. If the former, the name and the value will
  * be generated automatically.
  */
-class TagInput extends TextInputWidget {
+class TagInput extends TextInputWidget
+{
 
     /**
      * @var array plugin options
@@ -31,7 +32,7 @@ class TagInput extends TextInputWidget {
      * @var array plugin default options
      */
     protected $pluginDefaults = [
-        'width' => 'auto',
+      'width' => 'auto',
     ];
 
     /**
@@ -39,7 +40,8 @@ class TagInput extends TextInputWidget {
      */
     public function init()
     {
-        $this->pluginOptions = ArrayHelper::merge($this->pluginDefaults, $this->pluginOptions);
+        $this->pluginOptions = ArrayHelper::merge($this->pluginDefaults,
+          $this->pluginOptions);
 
         parent::init();
     }
@@ -65,7 +67,7 @@ class TagInput extends TextInputWidget {
                 !(function($){
                     var el = $('#{$this->options['id']}');
          
-                    el.tagsInput(".Json::encode($this->pluginOptions).");
+                    el.tagsInput(" . Json::encode($this->pluginOptions) . ");
 
                 })(jQuery);
                 ", \yii\web\View::POS_READY);

@@ -5,6 +5,7 @@
  */
 
 namespace dlds\metronic\widgets;
+
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\StringHelper;
@@ -13,7 +14,8 @@ use yii\web\View;
 
 
 /**
- * Notification renders a notification box that can be opened by clicking on a button.
+ * Notification renders a notification box that can be opened by clicking on a
+ * button.
  *
  * For example,
  * ```php
@@ -36,40 +38,57 @@ use yii\web\View;
  * echo 'Some title and body';
  * Notification::end();
  * ```
+ *
  * @see https://github.com/CodeSeven/toastr
  */
-class Notification extends  Widget
+class Notification extends Widget
 {
+
     // type
     const  TYPE_ERROR = 'error';
+
     const  TYPE_INFO = 'info';
+
     const  TYPE_SUCCESS = 'success';
+
     const  TYPE_WARNING = 'warning';
+
     // position
     const POSITION_TOP_RIGHT = 'toast-top-right';
+
     const POSITION_BOTTOM_RIGHT = 'toast-bottom-right';
+
     const POSITION_BOTTOM_LEFT = 'toast-bottom-left';
+
     const POSITION_TOP_LEFT = 'toast-top-left';
+
     const POSITION_TOP_CENTER = 'toast-top-center';
+
     const POSITION_BOTTOM_CENTER = 'toast-bottom-center';
+
     const POSITION_FULL_WIDTH = 'toast-top-full-width';
+
     // easing
     const EASING_LINEAR = 'linear';
+
     const EASING_SWING = 'swing';
 
     /**
      * @var string the notification title
      */
     public $title = '';
+
     /**
      * @var string the notification body
      */
     public $body = '';
+
     /**
      * @var string the notification type.
      * Valid values  are 'danger', 'info', 'success', 'warning'.
      */
     public $type = self::TYPE_SUCCESS;
+
     /**
      * @var array the configuration array for [[Button]].
      */
@@ -91,7 +110,7 @@ class Notification extends  Widget
         $this->body .= ob_get_clean();
         if (!empty($this->openButton)) {
             /** @var Button $widget */
-            $js =  'toastr.options = ' . Json::encode($this->clientOptions) . ';';
+            $js = 'toastr.options = ' . Json::encode($this->clientOptions) . ';';
             $this->view->registerJs($js, View::POS_READY);
             $this->initOpenButton();
         } else {
@@ -107,21 +126,22 @@ class Notification extends  Widget
     public function initOptions()
     {
         $defaultOptions = [
-            'closeButton'=> true,
-            'debug'=> false,
-            'positionClass'=> 'toast-top-right',
-            'onclick'=> null,
-            'showDuration'=> '1000',
-            'hideDuration'=> '1000',
-            'timeOut'=> '5000',
-            'extendedTimeOut'=> '1000',
-            'showEasing'=> 'swing',
-            'hideEasing'=> 'linear',
-            'showMethod'=> 'fadeIn',
-            'hideMethod'=> 'fadeOut'
+          'closeButton'     => true,
+          'debug'           => false,
+          'positionClass'   => 'toast-top-right',
+          'onclick'         => null,
+          'showDuration'    => '1000',
+          'hideDuration'    => '1000',
+          'timeOut'         => '5000',
+          'extendedTimeOut' => '1000',
+          'showEasing'      => 'swing',
+          'hideEasing'      => 'linear',
+          'showMethod'      => 'fadeIn',
+          'hideMethod'      => 'fadeOut',
         ];
 
-        $this->clientOptions = array_merge($defaultOptions, $this->clientOptions);
+        $this->clientOptions = array_merge($defaultOptions,
+          $this->clientOptions);
     }
 
     /**
@@ -133,8 +153,8 @@ class Notification extends  Widget
         $widget = Button::begin($this->openButton);
         $msg = "'{$this->body}', '{$this->title}'";
         $jsOpen = 'toastr.' . $this->type . '(' . $msg . ')';
-        if(!isset($widget->clientEvents['click'])) {
-            $widget->clientEvents['click'] =  "function(){{$jsOpen};}";
+        if (!isset($widget->clientEvents['click'])) {
+            $widget->clientEvents['click'] = "function(){{$jsOpen};}";
         }
         $widget->run();
     }

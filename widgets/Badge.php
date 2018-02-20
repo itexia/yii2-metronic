@@ -21,24 +21,33 @@ use yii\helpers\Html;
  *
  * @package dlds\metronic\widgets
  */
-class Badge extends  \yii\base\Widget
+class Badge extends \yii\base\Widget
 {
+
     // type
     const TYPE_DEFAULT = 'default';
+
     const TYPE_GRAY = 'default';
+
     const TYPE_SUCCESS = 'success';
+
     const TYPE_WARNING = 'warning';
+
     const TYPE_DANGER = 'danger';
+
     const TYPE_INFO = 'info';
+
     /**
      * @var string the badge label
      */
     public $label;
+
     /**
      * @var string the badge type
      * Valid values '', 'default', 'success', 'warning', 'danger', 'info'
      */
     public $type = self::TYPE_DEFAULT;
+
     /**
      * @var bool Indicates whether badge is rounded or not.
      */

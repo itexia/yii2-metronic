@@ -32,6 +32,7 @@ use yii\web\View;
  */
 class CheckboxList extends InputWidget
 {
+
     /**
      * @var array list of checkbox items.
      * Each item must be either as string like the name checkbox
@@ -41,19 +42,24 @@ class CheckboxList extends InputWidget
      * Item can not belong to the model.
      */
     public $items = [];
+
     /**
      * @var string the model attribute that this widget is associated with.
-     * This model attribute contains list of checkboxes name, separated $separator value.
+     * This model attribute contains list of checkboxes name, separated
+     *   $separator value.
      */
     public $attribute;
+
     /**
      * @var string separator values
      */
     public $separator = ',';
+
     /**
      * @var array the HTML attributes for items.
      */
     public $itemOptions = [];
+
     /**
      * @var array items name, that will be checked.
      */
@@ -67,7 +73,8 @@ class CheckboxList extends InputWidget
         parent::init();
         $items = [];
         if ($this->hasModel()) {
-            $this->_checked = array_map('trim', explode(',', $this->model->{$this->attribute}));
+            $this->_checked = array_map('trim',
+              explode(',', $this->model->{$this->attribute}));
             foreach ($this->items as $item) {
                 $input = [];
                 if (is_string($item)) {
@@ -79,7 +86,7 @@ class CheckboxList extends InputWidget
                     }
                     $input['name'] = $item['name'];
                     $input['label'] = isset($item['label']) ? $item['label'] : $this->model->getAttributeLabel(
-                        $item['name']
+                      $item['name']
                     );
                 }
                 $items[] = $input;
@@ -111,7 +118,8 @@ class CheckboxList extends InputWidget
     public function run()
     {
         if ($this->hasModel()) {
-            $hiddenInput = Html::activeHiddenInput($this->model, $this->attribute);
+            $hiddenInput = Html::activeHiddenInput($this->model,
+              $this->attribute);
             $inputId = Html::getInputId($this->model, $this->attribute);
         } else {
             $hiddenInput = Html::textInput($this->name, $this->name);
@@ -119,41 +127,44 @@ class CheckboxList extends InputWidget
         }
 
         $items = [];
-        usort($this->items, function($a, $b){
-                $aKey = array_search($a['name'], $this->_checked);
-                $bKey = array_search($b['name'], $this->_checked);
-                if ($aKey == $bKey) {
-                    return 0;
-                }
+        usort($this->items, function ($a, $b) {
+            $aKey = array_search($a['name'], $this->_checked);
+            $bKey = array_search($b['name'], $this->_checked);
+            if ($aKey == $bKey) {
+                return 0;
+            }
 
-                return  ($aKey > $bKey) ? 1 : -1;
-            });
+            return ($aKey > $bKey) ? 1 : -1;
+        });
         Html::addCssClass($this->itemOptions, 'btn btn-xs default');
         foreach ($this->items as $item) {
-            $checkbox = Html::checkbox($item['name'], in_array($item['name'], $this->_checked));
-            $items[] = Html::tag('span', $checkbox . ' ' . $item['label'], $this->itemOptions);
+            $checkbox = Html::checkbox($item['name'],
+              in_array($item['name'], $this->_checked));
+            $items[] = Html::tag('span', $checkbox . ' ' . $item['label'],
+              $this->itemOptions);
         }
 
         echo Html::beginTag('div', $this->options);
         echo Sortable::widget([
-                'items' => $items,
-                'options' => ['tag' => 'div'],
-                'itemOptions' => ['tag' => 'span'],
-                'clientOptions' => ['cursor' => 'move',
-                    'start' => new JsExpression('function(e, ui){
+          'items'         => $items,
+          'options'       => ['tag' => 'div'],
+          'itemOptions'   => ['tag' => 'span'],
+          'clientOptions' => [
+            'cursor' => 'move',
+            'start'  => new JsExpression('function(e, ui){
                         ui.placeholder.height(ui.item.height());
                         ui.placeholder.width(ui.item.width());
                     }'),
-                    'update' => new JsExpression("function(e, ui){
+            'update' => new JsExpression("function(e, ui){
                         var values = $.map($('#{$this->options['id']} input:checkbox:checked'),
                             function(item){ return $(item).attr('name')});
                         $('#{$inputId}').val(values.join('{$this->separator}'));
                     }"),
-                ],
-            ]);
+          ],
+        ]);
         echo $hiddenInput;
         echo Html::endTag('div');
-       $this->registerJs($inputId);
+        $this->registerJs($inputId);
     }
 
     protected function registerJs($inputId)

@@ -28,11 +28,15 @@ use yii\helpers\Html;
  * Note::end();
  * ```
  */
-class Note extends Widget {
+class Note extends Widget
+{
 
     const TYPE_DANGER = 'danger';
+
     const TYPE_INFO = 'info';
+
     const TYPE_SUCCESS = 'success';
+
     const TYPE_WARNING = 'warning';
 
     /**
@@ -57,7 +61,7 @@ class Note extends Widget {
     public function init()
     {
         parent::init();
-        Html::addCssClass($this->options, 'note note-'.$this->type);
+        Html::addCssClass($this->options, 'note note-' . $this->type);
         echo Html::beginTag('div', $this->options);
         echo $this->renderTitle();
     }
@@ -73,15 +77,18 @@ class Note extends Widget {
 
     /**
      * Renders title
+     *
      * @return string the rendering result
      */
     public function renderTitle()
     {
-        return !empty($this->title) ? Html::tag('h4', $this->title, ['class' => 'block']) : '';
+        return !empty($this->title) ? Html::tag('h4', $this->title,
+          ['class' => 'block']) : '';
     }
 
     /**
      * Renders body
+     *
      * @return string the rendering result
      */
     public function renderBody()

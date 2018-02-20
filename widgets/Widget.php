@@ -17,27 +17,35 @@ use yii\helpers\Json;
  */
 class Widget extends \yii\bootstrap\Widget
 {
+
     /**
      * @var array the HTML attributes for the widget container tag.
      */
     public $options = [];
+
     /**
      * @var array the options for the underlying Metronic JS plugin.
-     * Please refer to the corresponding Metronic plugin Web page for possible options.
-     * For example, [this page](http://yii2metronic.icron.org/javascript.html#portlet) shows
-     * how to use the "Portlet" plugin and the supported options (e.g. "loadSuccess").
+     * Please refer to the corresponding Metronic plugin Web page for possible
+     *   options. For example, [this
+     *   page](http://yii2metronic.icron.org/javascript.html#portlet) shows how
+     *   to use the "Portlet" plugin and the supported options (e.g.
+     *   "loadSuccess").
      */
     public $clientOptions = [];
+
     /**
      * @var array the event handlers for the underlying Metronic JS plugin.
-     * Please refer to the corresponding Metronic plugin Web page for possible events.
-     * For example, [this page](http://yii2metronic.icron.org/javascript.html#portlet) shows
-     * how to use the "Portlet" plugin and the supported events (e.g. "close.mr.portlet").
+     * Please refer to the corresponding Metronic plugin Web page for possible
+     *   events. For example, [this
+     *   page](http://yii2metronic.icron.org/javascript.html#portlet) shows how
+     *   to use the "Portlet" plugin and the supported events (e.g.
+     *   "close.mr.portlet").
      */
     public $clientEvents = [];
 
     /**
      * Registers a specific Bootstrap plugin and the related events
+     *
      * @param string $name the name of the Bootstrap plugin
      */
     protected function registerPlugin($name)

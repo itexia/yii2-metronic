@@ -10,7 +10,8 @@ use yii\helpers\Html;
 use \yii\helpers\ArrayHelper;
 use dlds\metronic\bundles\TreeAsset;
 
-class Tree extends InputWidget {
+class Tree extends InputWidget
+{
 
     /**
      * @var array items to be traversed in tree
@@ -81,15 +82,15 @@ class Tree extends InputWidget {
      * @var array default tree config
      */
     protected $defaultTreeOptions = [
-        'plugins' => [
-            'wholerow',
+      'plugins' => [
+        'wholerow',
+      ],
+      'core'    => [
+        'themes' => [
+          'responsive' => false,
+          'icons'      => false,
         ],
-        'core' => [
-            'themes' => [
-                'responsive' => false,
-                'icons' => false
-            ],
-        ],
+      ],
     ];
 
     /**
@@ -105,70 +106,73 @@ class Tree extends InputWidget {
      */
     public function run()
     {
-        $builder = \dlds\metronic\builders\TreeBuilder::instance($this->items, array(
-                'treeTag' => $this->listTag,
-                'itemTag' => $this->itemTag,
-                'levelAttr' => $this->levelAttr,
-                'contentCallback' => $this->contentCallback,
-                'treeHtmlOptions' => function() {
-                    return $this->getTreeOptions();
-                },
-                'itemHtmlOptions' => function($id) {
-                    return $this->getItemOptions($id);
-                },
-                'contentHtmlOptions' => function() {
-                    return $this->getContentOptions();
-                },
-        ));
+        $builder = \dlds\metronic\builders\TreeBuilder::instance($this->items, [
+          'treeTag'            => $this->listTag,
+          'itemTag'            => $this->itemTag,
+          'levelAttr'          => $this->levelAttr,
+          'contentCallback'    => $this->contentCallback,
+          'treeHtmlOptions'    => function () {
+              return $this->getTreeOptions();
+          },
+          'itemHtmlOptions'    => function ($id) {
+              return $this->getItemOptions($id);
+          },
+          'contentHtmlOptions' => function () {
+              return $this->getContentOptions();
+          },
+        ]);
 
         echo $this->renderTree($builder->build());
     }
 
     /**
      * Retrieves tree html options
+     *
      * @return array tree html options
      */
     protected function getTreeOptions()
     {
-        return array(
-            'class' => $this->listClass,
-        );
+        return [
+          'class' => $this->listClass,
+        ];
     }
 
     /**
      * Retrieves item html options
+     *
      * @param array $id passed item id
      */
     protected function getItemOptions($id)
     {
-        return array(
-            'class' => $this->itemClass,
-            'data-id' => $id,
-            'data-jstree' => json_encode([
-                'selected' => $this->isItemAssigned($id),
-            ]),
-        );
+        return [
+          'class'       => $this->itemClass,
+          'data-id'     => $id,
+          'data-jstree' => json_encode([
+            'selected' => $this->isItemAssigned($id),
+          ]),
+        ];
     }
 
     /**
      * Retrieves content html options
+     *
      * @return type
      */
     protected function getContentOptions()
     {
-        return array(
-            'class' => $this->contentClass,
-        );
+        return [
+          'class' => $this->contentClass,
+        ];
     }
 
     /**
      * Indicates if item is currently assigned to model
+     *
      * @param int $id given item id
      */
     protected function isItemAssigned($id)
     {
-        if (null === $this->_assignedItems)
-        {
+        if (null === $this->_assignedItems) {
             $this->_assignedItems = $this->pullAssignedItems();
         }
 
@@ -180,29 +184,29 @@ class Tree extends InputWidget {
      */
     protected function pullAssignedItems()
     {
-        if (is_string($this->model{$this->attribute}))
-        {
+        if (is_string($this->model{$this->attribute})) {
             return explode(',', $this->model{$this->attribute});
         }
 
-        return (array) $this->model{$this->attribute};
+        return (array)$this->model{$this->attribute};
     }
 
     /**
      * Renders output
-     * @param string $tree 
+     *
+     * @param string $tree
      */
     protected function renderTree($tree)
     {
-        $this->treeOptions = array_merge(['id' => $this->id], $this->treeOptions);
+        $this->treeOptions = array_merge(['id' => $this->id],
+          $this->treeOptions);
         $html = Html::beginTag('div', $this->treeOptions);
 
         $html .= $tree;
 
         $html .= Html::endTag('div');
 
-        if ($this->checkable)
-        {
+        if ($this->checkable) {
             $html .= $this->renderHiddenField();
         }
 
@@ -214,12 +218,13 @@ class Tree extends InputWidget {
      */
     protected function renderHiddenField()
     {
-        if ($this->hasModel())
-        {
-            return Html::activeInput('hidden', $this->model, $this->attribute, ['id' => $this->getHiddenFieldId()]);
+        if ($this->hasModel()) {
+            return Html::activeInput('hidden', $this->model, $this->attribute,
+              ['id' => $this->getHiddenFieldId()]);
         }
 
-        return Html::input('hidden', $this->name, $this->value, ['id' => $this->getHiddenFieldId()]);
+        return Html::input('hidden', $this->name, $this->value,
+          ['id' => $this->getHiddenFieldId()]);
     }
 
     /**
@@ -227,21 +232,22 @@ class Tree extends InputWidget {
      */
     protected function jsTree()
     {
-        if ($this->checkable)
-        {
-            $this->defaultTreeOptions = ArrayHelper::merge($this->defaultTreeOptions, [
-                    'plugins' => [
-                        'checkbox'
-                    ],
-                    'checkbox' => [
-                        'keep_selected_style' => false,
-                        'three_state' => false,
-                        'cascade' => ''
-                    ]
-            ]);
+        if ($this->checkable) {
+            $this->defaultTreeOptions = ArrayHelper::merge($this->defaultTreeOptions,
+              [
+                'plugins'  => [
+                  'checkbox',
+                ],
+                'checkbox' => [
+                  'keep_selected_style' => false,
+                  'three_state'         => false,
+                  'cascade'             => '',
+                ],
+              ]);
         }
 
-        $treeOptions = json_encode(ArrayHelper::merge($this->defaultTreeOptions, $this->treeOptions));
+        $treeOptions = json_encode(ArrayHelper::merge($this->defaultTreeOptions,
+          $this->treeOptions));
 
         $view = $this->getView();
         $view->registerJs("jQuery('#{$this->id}').jstree({$treeOptions});");
@@ -253,8 +259,7 @@ class Tree extends InputWidget {
     {
         $view = $this->getView();
 
-        if ($this->checkable)
-        {
+        if ($this->checkable) {
             $view->registerJs("jQuery('#{$this->id}').on('changed.jstree', function (e, data) {
             var i, j, r = [];
 
@@ -287,8 +292,9 @@ class Tree extends InputWidget {
      */
     private function getHiddenFieldId()
     {
-        $formName = $this->model ?  $this->model->formName() : 'jstree-form';
+        $formName = $this->model ? $this->model->formName() : 'jstree-form';
         return strtolower(sprintf('%s-%s', $formName, $this->attribute));
     }
 }
+
 ?>

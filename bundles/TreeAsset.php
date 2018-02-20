@@ -8,24 +8,25 @@
 namespace dlds\metronic\bundles;
 
 
-class TreeAsset extends BaseAssetBundle {
+class TreeAsset extends BaseAssetBundle
+{
 
     /**
      * @var array CSS
      */
     public $css = [
-        'global/plugins/jstree/dist/themes/default/style.min.css',
+      'global/plugins/jstree/dist/themes/default/style.min.css',
     ];
 
-    public $js = [  
-        'global/plugins/jstree/dist/jstree.min.js',
+    public $js = [
+      'global/plugins/jstree/dist/jstree.min.js',
     ];
-    
+
     /**
      * @var array depends on
      */
     public $depends = [
-        'dlds\metronic\bundles\CoreAsset',
+      'dlds\metronic\bundles\CoreAsset',
     ];
 
 }

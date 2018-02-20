@@ -29,13 +29,14 @@ use yii\helpers\Html;
  * @author icron.org <arbuscula@gmail.com>
  * @since 1.0
  */
-class Panel extends Widget {
+class Panel extends Widget
+{
 
     /**
      * Types
      */
     const TYPE_DEFAULT = 'panel-default';
-    
+
     /**
      * @var string The portlet title
      */
@@ -54,7 +55,8 @@ class Panel extends Widget {
 
     /**
      * @var string The portlet color
-     * Valid values are 'light-blue', 'blue', 'red', 'yellow', 'green', 'purple', 'light-grey', 'grey'
+     * Valid values are 'light-blue', 'blue', 'red', 'yellow', 'green',
+     *   'purple', 'light-grey', 'grey'
      */
     public $color = '';
 
@@ -80,7 +82,8 @@ class Panel extends Widget {
     {
         parent::init();
 
-        Html::addCssClass($this->options, trim(sprintf('panel %s', $this->type)));
+        Html::addCssClass($this->options,
+          trim(sprintf('panel %s', $this->type)));
         echo Html::beginTag('div', $this->options);
 
         $this->_renderTitle();
@@ -103,16 +106,15 @@ class Panel extends Widget {
      */
     private function _renderTitle()
     {
-        if (false !== $this->title)
-        {
+        if (false !== $this->title) {
             Html::addCssClass($this->headerOptions, 'panel-heading');
 
             echo Html::beginTag('div', $this->headerOptions);
 
-            echo Html::beginTag('div', ['class' => $this->pushFontColor('panel-title')]);
+            echo Html::beginTag('div',
+              ['class' => $this->pushFontColor('panel-title')]);
 
-            if ($this->icon)
-            {
+            if ($this->icon) {
                 echo Html::tag('i', '', ['class' => $this->icon]);
             }
 
@@ -129,8 +131,7 @@ class Panel extends Widget {
      */
     protected function getFontColor()
     {
-        if ($this->color)
-        {
+        if ($this->color) {
             return sprintf('font-%s', $this->color);
         }
 
@@ -144,8 +145,7 @@ class Panel extends Widget {
     {
         $color = $this->getFontColor();
 
-        if ($color)
-        {
+        if ($color) {
             return sprintf('%s %s', $string, $color);
         }
 

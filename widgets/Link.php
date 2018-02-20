@@ -24,10 +24,12 @@ use yii\helpers\Html;
  * ]);
  * ```
  */
-class Link extends Widget {
+class Link extends Widget
+{
 
     // Icon position
     const ICON_POSITION_LEFT = 'left';
+
     const ICON_POSITION_RIGHT = 'right';
 
     /**
@@ -63,17 +65,16 @@ class Link extends Widget {
 
     /**
      * Initializes the widget.
+     *
      * @throws InvalidConfigException
      */
     public function init()
     {
-        if ($this->label === null)
-        {
+        if ($this->label === null) {
             throw new InvalidConfigException("The 'label' option is required.");
         }
 
-        if ($this->url === null)
-        {
+        if ($this->url === null) {
             $this->url = '#';
         }
     }
@@ -83,15 +84,14 @@ class Link extends Widget {
      */
     public function run()
     {
-        $icon = ($this->icon === null) ? '' : Html::tag('i', '', ['class' => $this->icon]);
-        $label = Html::tag('span', Html::encode($this->label), $this->labelOptions);
+        $icon = ($this->icon === null) ? '' : Html::tag('i', '',
+          ['class' => $this->icon]);
+        $label = Html::tag('span', Html::encode($this->label),
+          $this->labelOptions);
 
-        if (strcasecmp($this->iconPosition, self::ICON_POSITION_LEFT) === 0)
-        {
+        if (strcasecmp($this->iconPosition, self::ICON_POSITION_LEFT) === 0) {
             $content = sprintf('%s %s', $icon, $label);
-        }
-        else
-        {
+        } else {
             $content = sprintf('%s %s', $label, $icon);
         }
         echo Html::a($content, $this->url, $this->options);

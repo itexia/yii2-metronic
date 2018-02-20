@@ -28,32 +28,44 @@ use yii\helpers\Html;
  * ]);
  * ```
  */
-class Button extends \yii\bootstrap\Button {
+class Button extends \yii\bootstrap\Button
+{
 
     /**
      *  Button bootstrap types
      */
     const TYPE_DEFAULT = '';
+
     const TYPE_PRIMARY = 'primary';
+
     const TYPE_INFO = 'info';
+
     const TYPE_SUCCESS = 'success';
+
     const TYPE_WARNING = 'warning';
+
     const TYPE_DANGER = 'danger';
+
     const TYPE_INVERSE = 'inverse';
+
     const TYPE_LINK = 'link';
+
     const TYPE_CIRCLE = 'circle';
 
     /**
      * Button sizes
      */
     const SIZE_MINI = 'xs';
+
     const SIZE_SMALL = 'sm';
+
     const SIZE_LARGE = 'lg';
 
     /**
      * Icon positions
      */
     const ICON_POSITION_LEFT = 'left';
+
     const ICON_POSITION_RIGHT = 'right';
 
     /**
@@ -64,8 +76,9 @@ class Button extends \yii\bootstrap\Button {
 
     /**
      * @var string The button type.
-     * Valid values for metronic styles are 'default', 'red', 'blue', 'green', 'yellow', 'purple', 'dark'.
-     * Valid values for bootstrap styles are 'primary', 'info', 'success', 'warning', 'danger', 'inverse', 'link'.
+     * Valid values for metronic styles are 'default', 'red', 'blue', 'green',
+     *   'yellow', 'purple', 'dark'. Valid values for bootstrap styles are
+     *   'primary', 'info', 'success', 'warning', 'danger', 'inverse', 'link'.
      */
     public $type = self::TYPE_DEFAULT;
 
@@ -91,7 +104,8 @@ class Button extends \yii\bootstrap\Button {
     public $disabled = false;
 
     /**
-     * @var bool Indicates whether the button should span the full width of the a parent.
+     * @var bool Indicates whether the button should span the full width of the
+     *   a parent.
      */
     public $block = false;
 
@@ -99,14 +113,14 @@ class Button extends \yii\bootstrap\Button {
      * @var bool Indicates whether the dropdown shoud expand on hover.
      */
     public $hover = false;
-    
+
     /**
      * @var array sizes
      */
     private $_sizes = [
-        self::SIZE_MINI,
-        self::SIZE_SMALL,
-        self::SIZE_LARGE,
+      self::SIZE_MINI,
+      self::SIZE_SMALL,
+      self::SIZE_LARGE,
     ];
 
     /**
@@ -116,25 +130,21 @@ class Button extends \yii\bootstrap\Button {
     {
         parent::init();
 
-        if (static::TYPE_DEFAULT !== $this->type)
-        {
+        if (static::TYPE_DEFAULT !== $this->type) {
             Html::addCssClass($this->options, sprintf('btn-%s', $this->type));
         }
 
         Html::addCssClass($this->options, $this->color);
 
-        if (in_array($this->size, $this->_sizes))
-        {
+        if (in_array($this->size, $this->_sizes)) {
             Html::addCssClass($this->options, 'btn-' . $this->size);
         }
 
-        if ($this->disabled === true)
-        {
+        if ($this->disabled === true) {
             Html::addCssClass($this->options, 'disabled');
         }
 
-        if ($this->block === true)
-        {
+        if ($this->block === true) {
             Html::addCssClass($this->options, 'btn-block');
         }
 
@@ -148,10 +158,11 @@ class Button extends \yii\bootstrap\Button {
     {
         $label = $this->encodeLabel ? Html::encode($this->label) : $this->label;
 
-        if ($this->icon !== null)
-        {
+        if ($this->icon !== null) {
             $icon = Html::tag('i', '', ['class' => $this->icon]);
-            $label = strcasecmp($this->iconPosition, self::ICON_POSITION_LEFT) === 0 ? sprintf('%s %s', $icon, $label) : sprintf('%s %s', $label, $icon);
+            $label = strcasecmp($this->iconPosition,
+              self::ICON_POSITION_LEFT) === 0 ? sprintf('%s %s', $icon,
+              $label) : sprintf('%s %s', $label, $icon);
         }
 
         echo Html::tag($this->tagName, $label, $this->options);

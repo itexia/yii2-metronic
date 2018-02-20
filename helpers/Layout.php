@@ -13,16 +13,22 @@ use yii\helpers\Html;
 /**
  * Layout helper
  */
-class Layout {
+class Layout
+{
 
     /**
      * Retrieves Html options
+     *
      * @param string $tag given tag
      * @param boolean $asString if return as string
+     *
      * @return type
      */
-    public static function getHtmlOptions($tag, $options = [], $asString = false)
-    {
+    public static function getHtmlOptions(
+      $tag,
+      $options = [],
+      $asString = false
+    ) {
         $callback = sprintf('static::_%sOptions', strtolower($tag));
 
         $htmlOptions = call_user_func($callback, $options);
@@ -32,39 +38,34 @@ class Layout {
 
     /**
      * Adds body tag options
+     *
      * @param array $options given options
      */
     private static function _bodyOptions($options)
     {
         Html::addCssClass($options, 'page-sidebar-closed-hide-logo');
 
-        if (Metronic::getComponent() && Metronic::STYLE_MATERIAL === Metronic::getComponent()->style)
-        {
+        if (Metronic::getComponent() && Metronic::STYLE_MATERIAL === Metronic::getComponent()->style) {
             Html::addCssClass($options, 'page-md');
         }
 
-        if (Metronic::getComponent() && Metronic::LAYOUT_BOXED === Metronic::getComponent()->layoutOption)
-        {
+        if (Metronic::getComponent() && Metronic::LAYOUT_BOXED === Metronic::getComponent()->layoutOption) {
             Html::addCssClass($options, 'page-boxed');
         }
 
-        if (Metronic::getComponent() && Metronic::HEADER_FIXED === Metronic::getComponent()->headerOption)
-        {
+        if (Metronic::getComponent() && Metronic::HEADER_FIXED === Metronic::getComponent()->headerOption) {
             Html::addCssClass($options, 'page-header-fixed');
         }
 
-        if (Metronic::getComponent() && Metronic::SIDEBAR_POSITION_RIGHT === Metronic::getComponent()->sidebarPosition)
-        {
+        if (Metronic::getComponent() && Metronic::SIDEBAR_POSITION_RIGHT === Metronic::getComponent()->sidebarPosition) {
             Html::addCssClass($options, 'page-sidebar-reversed');
         }
 
-        if (Metronic::getComponent() && Metronic::SIDEBAR_FIXED === Metronic::getComponent()->sidebarOption)
-        {
+        if (Metronic::getComponent() && Metronic::SIDEBAR_FIXED === Metronic::getComponent()->sidebarOption) {
             Html::addCssClass($options, 'page-sidebar-fixed');
         }
 
-        if (Metronic::getComponent() && Metronic::FOOTER_FIXED === Metronic::getComponent()->footerOption)
-        {
+        if (Metronic::getComponent() && Metronic::FOOTER_FIXED === Metronic::getComponent()->footerOption) {
             Html::addCssClass($options, 'page-footer-fixed');
         }
 
@@ -73,18 +74,16 @@ class Layout {
 
     /**
      * Adds header tag options
+     *
      * @param array $options given options
      */
     private static function _headerOptions($options)
     {
         Html::addCssClass($options, 'page-header navbar');
 
-        if (Metronic::getComponent() && Metronic::HEADER_FIXED === Metronic::getComponent()->headerOption)
-        {
+        if (Metronic::getComponent() && Metronic::HEADER_FIXED === Metronic::getComponent()->headerOption) {
             Html::addCssClass($options, 'navbar-fixed-top');
-        }
-        else
-        {
+        } else {
             Html::addCssClass($options, 'navbar-static-top');
         }
 
@@ -93,6 +92,7 @@ class Layout {
 
     /**
      * Adds actions tag options
+     *
      * @param array $options given options
      */
     private static function _actionsOptions($options)
@@ -104,6 +104,7 @@ class Layout {
 
     /**
      * Adds top tag options
+     *
      * @param array $options given options
      */
     private static function _topOptions($options)
@@ -115,6 +116,7 @@ class Layout {
 
     /**
      * Adds topmenu tag options
+     *
      * @param array $options given options
      */
     private static function _topmenuOptions($options)
@@ -126,6 +128,7 @@ class Layout {
 
     /**
      * Adds container tag options
+     *
      * @param array $options given options
      */
     private static function _containerOptions($options)
@@ -137,6 +140,7 @@ class Layout {
 
     /**
      * Adds clearfix tag options
+     *
      * @param array $options given options
      */
     private static function _clearfixOptions($options)

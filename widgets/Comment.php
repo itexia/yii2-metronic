@@ -1,8 +1,10 @@
 <?php
+
 namespace dlds\metronic\widgets;
 
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * Class Comment
@@ -16,7 +18,7 @@ class Comment extends Widget
 {
 
     /**
-     * @var
+     * @var string url to get image from
      */
     public $image;
 
@@ -84,7 +86,7 @@ class Comment extends Widget
             return;
         }
 
-        $this->html[] = Html::tag('div', $this->image,
+        $this->html[] = Html::tag('div', Html::img(Url::toRoute([$this->image]), ['height' => '45px']),
           ['class' => 'mt-comment-img']);
 
         return $this->html;

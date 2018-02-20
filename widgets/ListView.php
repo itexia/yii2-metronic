@@ -11,7 +11,8 @@ use \yii\helpers\ArrayHelper;
 use dlds\metronic\bundles\ListViewAsset;
 use dlds\metronic\bundles\ListViewSortableAsset;
 
-class ListView extends \yii\widgets\ListView {
+class ListView extends \yii\widgets\ListView
+{
 
     const SORTABLE_ITEM_CLASS = 'sortable-item';
 
@@ -42,29 +43,27 @@ class ListView extends \yii\widgets\ListView {
     {
         $route = ArrayHelper::getValue($this->sortable, 'url', false);
 
-        if ($route)
-        {
+        if ($route) {
             $url = Url::toRoute($route);
 
-            if (ArrayHelper::keyExists('class', $this->itemOptions))
-            {
-                $this->itemOptions['class'] = sprintf('%s %s', $this->itemOptions['class'], self::SORTABLE_ITEM_CLASS);
-            }
-            else
-            {
+            if (ArrayHelper::keyExists('class', $this->itemOptions)) {
+                $this->itemOptions['class'] = sprintf('%s %s',
+                  $this->itemOptions['class'], self::SORTABLE_ITEM_CLASS);
+            } else {
                 $this->itemOptions['class'] = self::SORTABLE_ITEM_CLASS;
             }
 
-            $options = json_encode(ArrayHelper::getValue($this->sortable, 'options', []));
+            $options = json_encode(ArrayHelper::getValue($this->sortable,
+              'options', []));
 
             $view = $this->getView();
             $view->registerJs("jQuery('#{$this->id}').SortableListView('{$url}', {$options});");
 
             $reload = ArrayHelper::getValue($this->sortable, 'reload', false);
 
-            if ($reload)
-            {
-                $view->registerJs("jQuery('#{$this->id}').on('sortableSuccess', $reload)", \yii\web\View::POS_END);
+            if ($reload) {
+                $view->registerJs("jQuery('#{$this->id}').on('sortableSuccess', $reload)",
+                  \yii\web\View::POS_END);
             }
 
             ListViewSortableAsset::register($view);

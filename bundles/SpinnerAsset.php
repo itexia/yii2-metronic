@@ -4,7 +4,7 @@
  * @license http://www.digitaldeals.cz/license/
  */
 
-namespace  dlds\metronic\bundles;
+namespace dlds\metronic\bundles;
 
 /**
  * SpinnerAsset for spinner widget.
@@ -13,10 +13,10 @@ class SpinnerAsset extends BaseAssetBundle
 {
 
     public $js = [
-        'plugins/fuelux/js/spinner.min.js',
+      'plugins/fuelux/js/spinner.min.js',
     ];
 
     public $depends = [
-        'dlds\metronic\bundles\CoreAsset',
+      'dlds\metronic\bundles\CoreAsset',
     ];
 }
