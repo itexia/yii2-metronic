@@ -35,7 +35,7 @@ class Comments extends Widget
     /**
      * @var (array) helper
      */
-    private $html;
+    private $html = [];
 
     /**
      * @inheritdoc
@@ -66,7 +66,7 @@ class Comments extends Widget
      */
     protected function renderComments()
     {
-        foreach ($this->comments as $comment) {
+        foreach ($this->comments ?? [] as $comment) {
             $this->html[] = Comment::widget($comment);
         }
 
