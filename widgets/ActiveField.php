@@ -11,7 +11,7 @@ namespace dlds\metronic\widgets;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
-class ActiveField extends \yii\widgets\ActiveField
+class ActiveField extends \yii\bootstrap\ActiveField
 {
 
     /**

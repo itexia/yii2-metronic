@@ -13,7 +13,7 @@ use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\widgets\ActiveFormAsset;
 
-class ActiveForm extends \yii\widgets\ActiveForm
+class ActiveForm extends \yii\bootstrap\ActiveForm
 {
 
     // Buttons align
@@ -123,6 +123,9 @@ class ActiveForm extends \yii\widgets\ActiveForm
                   'labelOptions' => ['class' => 'sr-only'],
                 ], $this->fieldConfig);
                 break;
+        }
+        if (isset($this->fieldClass)) {
+            $this->fieldConfig['class'] = $this->fieldClass;
         }
         if (!isset($this->fieldConfig['class'])) {
             $this->fieldConfig['class'] = ActiveField::className();
