@@ -6,6 +6,7 @@
 
 namespace dlds\metronic\widgets;
 
+use function GuzzleHttp\debug_resource;
 use yii\helpers\Html;
 use \yii\helpers\ArrayHelper;
 use dlds\metronic\bundles\TreeAsset;
@@ -272,10 +273,21 @@ class Tree extends InputWidget
         }
 
         $view->registerJs("jQuery('#{$this->id}').on('select_node.jstree', function (e, data) {
-            var \$this = $(this);
-            \$this.jstree('open_node', data.node);
-            var ParentNode = \$this.jstree('get_parent', data.node);
-            \$this.jstree('select_node', ParentNode);
+        
+            // TODO: checks too many boxes! is this needed?? deactivate for now
+            /*
+            // if data.event is undefined its triggered by cascade, that is wrong
+            if (typeof data.event != 'undefined') {
+            
+                // TODO: deactivate cascade now and reactivate after?
+                var \$this = $(this);    
+                // var cascadeSetting = \$this.jstree(true).settings.checkbox.cascade;
+                \$this.jstree('open_node', data.node);
+                var ParentNode = \$this.jstree('get_parent', data.node);
+                \$this.jstree('select_node', ParentNode);
+                // \$this.jstree(true).settings.checkbox.cascade = cascadeSetting;
+            }
+            */
         });");
 
         $view->registerJs("jQuery('#{$this->id}').on('deselect_node.jstree', function (e, data) {
