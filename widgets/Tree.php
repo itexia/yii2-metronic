@@ -6,7 +6,6 @@
 
 namespace dlds\metronic\widgets;
 
-use function GuzzleHttp\debug_resource;
 use yii\helpers\Html;
 use \yii\helpers\ArrayHelper;
 use dlds\metronic\bundles\TreeAsset;
