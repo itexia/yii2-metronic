@@ -108,16 +108,13 @@ class DropZone extends Widget
         // add JS for existing files
         if (count($this->existingFiles) > 0) {
             foreach ($this->existingFiles as $fileArray) {
-                $fullPath = $fileArray['fullPath'];
                 $filename = $fileArray['filename'];
                 $url = $fileArray['url'];
 
-                if (is_file($fullPath)) {
-                    $fileSize = filesize($fullPath);
-
+                if ($url) {
                     $js .= '
                     // Create the mock file:
-                    var mockFile = { name: "' . $filename . '", size: ' . $fileSize . ' };
+                    var mockFile = { name: "' . $filename . '", size: 1 };
                     
                     // add mockFile
                     ' . $this->id . '.files.push(mockFile); // TODO: needed?
