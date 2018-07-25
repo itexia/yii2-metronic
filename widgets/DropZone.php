@@ -108,15 +108,15 @@ class DropZone extends Widget
         // add JS for existing files
         if (count($this->existingFiles) > 0) {
             foreach ($this->existingFiles as $fileArray) {
-                $fullPath = $fileArray['fullPath']; // TODO: only first or foreach
-                $filename = $fileArray['filename']; // TODO: only first or foreach
+                $fullPath = $fileArray['fullPath'];
+                $filename = $fileArray['filename'];
+                $url = $fileArray['url'];
 
                 if (is_file($fullPath)) {
                     $fileSize = filesize($fullPath);
 
                     $js .= '
                     // Create the mock file:
-//                    var mockFile = { dataURL: "' . addslashes($fullPath) . '", name: "' . $filename . '", size: ' . $fileSize . ' }; // TODO: dataURL only needed in old version?
                     var mockFile = { name: "' . $filename . '", size: ' . $fileSize . ' };
                     
                     // add mockFile
@@ -124,14 +124,10 @@ class DropZone extends Widget
                     ' . $this->id . '.emit("addedfile", mockFile);
                     
                     // TODO: create thumbnail?
-//                    ' . $this->id . '.options.thumbnail.call(' . $this->id . ', mockFile, "' . addslashes($fullPath) . '");
+//                    ' . $this->id . '.options.thumbnail.call(' . $this->id . ', mockFile, "' . addslashes($url) . '");
     
                     // or use existing as thumb?
-                    ' . $this->id . '.emit("thumbnail", mockFile, "' . addslashes($fullPath) . '");
-                    // Or if the file on your server is not yet in the right
-                    // size, you can let Dropzone download and resize it
-                    // callback and crossOrigin are optional.
-//                    ' . $this->id . '.createThumbnailFromUrl(mockFile, "' . addslashes($fullPath) . '");
+                    ' . $this->id . '.emit("thumbnail", mockFile, "' . addslashes($url) . '");
     
                     // Make sure that there is no progress bar, etc...
                     ' . $this->id . '.emit("complete", mockFile);
