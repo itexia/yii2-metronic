@@ -19,6 +19,11 @@ class DropZone extends Widget
      */
     public $clientEvents = [];
 
+    /**
+     * @var array An array of previously uploaded files
+     */
+    public $existingFiles = [];
+
     //Default Values
     public $id = 'myDropzone';
 
@@ -47,7 +52,7 @@ class DropZone extends Widget
             $this->options['url'] = $this->uploadUrl;   // Set the url
         }
 
-        // Define the element that should be used as click trigger to select files.
+        // Define the element that will contain the uploaded files
         if (!isset($this->options['previewsContainer'])) {
             $this->options['previewsContainer'] = '#' . $this->previewsContainer;
         }
@@ -99,6 +104,42 @@ class DropZone extends Widget
                 $js .= "$this->id.on('$event', $handler);";
             }
         }
+
+        // add JS for existing files
+        if (count($this->existingFiles) > 0) {
+            foreach ($this->existingFiles as $fileArray) {
+                $fullPath = $fileArray['fullPath']; // TODO: only first or foreach
+                $filename = $fileArray['filename']; // TODO: only first or foreach
+
+                if (is_file($fullPath)) {
+                    $fileSize = filesize($fullPath);
+
+                    $js .= '
+                    // Create the mock file:
+//                    var mockFile = { dataURL: "' . addslashes($fullPath) . '", name: "' . $filename . '", size: ' . $fileSize . ' }; // TODO: dataURL only needed in old version?
+                    var mockFile = { name: "' . $filename . '", size: ' . $fileSize . ' };
+                    
+                    // add mockFile
+                    ' . $this->id . '.files.push(mockFile); // TODO: needed?
+                    ' . $this->id . '.emit("addedfile", mockFile);
+                    
+                    // TODO: create thumbnail?
+//                    ' . $this->id . '.options.thumbnail.call(' . $this->id . ', mockFile, "' . addslashes($fullPath) . '");
+    
+                    // or use existing as thumb?
+                    ' . $this->id . '.emit("thumbnail", mockFile, "' . addslashes($fullPath) . '");
+                    // Or if the file on your server is not yet in the right
+                    // size, you can let Dropzone download and resize it
+                    // callback and crossOrigin are optional.
+//                    ' . $this->id . '.createThumbnailFromUrl(mockFile, "' . addslashes($fullPath) . '");
+    
+                    // Make sure that there is no progress bar, etc...
+                    ' . $this->id . '.emit("complete", mockFile);
+                ';
+                }
+            }
+        }
+
         $view->registerJs($js);
         DropZoneAsset::register($view);
     }
