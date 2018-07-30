@@ -126,6 +126,12 @@ class Nav extends \yii\bootstrap\Nav
     public $navbar = self::NAVBAR_DEFAULT;
 
     /**
+     * True, if dropdown should open on hover. If false, click event is needed.
+     * @var bool
+     */
+    public $dropdownOnHover = true;
+
+    /**
      * Initializes the widget.
      */
     public function init()
@@ -224,7 +230,9 @@ class Nav extends \yii\bootstrap\Nav
         $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
 
         $linkOptions['data-toggle'] = 'dropdown';
-        $linkOptions['data-hover'] = 'dropdown';
+        if ($this->dropdownOnHover) {
+            $linkOptions['data-hover'] = 'dropdown';
+        }
         $linkOptions['data-close-others'] = 'true';
 
         Html::addCssClass($linkOptions, 'dropdown-toggle');
