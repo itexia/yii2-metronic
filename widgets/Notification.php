@@ -6,6 +6,7 @@
 
 namespace dlds\metronic\widgets;
 
+use dlds\metronic\bundles\NotificationAsset;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\StringHelper;
