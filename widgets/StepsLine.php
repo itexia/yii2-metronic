@@ -78,6 +78,9 @@ class StepsLine extends Widget
             case 4:
                 $this->cssColClass = 'col-md-3';
                 break;
+            case 5:
+                $this->cssColClass = 'col-md-2';
+                break;
             default:
                 throw new InvalidConfigException(
                   "Only three and four steps are supported by this widget. Your actual item count is $numberOfItems"
@@ -114,7 +117,7 @@ class StepsLine extends Widget
 
             switch ($n) {
                 case 1:
-                    $itemCssColClass .= ' first';
+                    $itemCssColClass .= ' first col-md-offset-1';
                     break;
                 case $numberOfItems:
                     $itemCssColClass .= ' last';
