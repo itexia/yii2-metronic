@@ -117,7 +117,8 @@ class StepsLine extends Widget
 
             switch ($n) {
                 case 1:
-                    $itemCssColClass .= ' first col-md-offset-1';
+                    $itemCssColClass .= ' first';
+                    $itemCssColClass .= $numberOfItems === 5 ? ' col-md-offset-1' : '';
                     break;
                 case $numberOfItems:
                     $itemCssColClass .= ' last';
