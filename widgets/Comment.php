@@ -23,6 +23,11 @@ class Comment extends Widget
     public $image;
 
     /**
+     * @var string class if no image is given. (show default image)
+     */
+    public $defaultImageClass;
+
+    /**
      * @var string
      */
     public $author;
@@ -82,8 +87,15 @@ class Comment extends Widget
      */
     protected function renderImage()
     {
-        if (!$this->image) {
+        if (!$this->image && !$this->defaultImageClass) {
             return;
+        }
+
+        if (!$this->image){
+            $this->html[] = Html::tag('div', Html::tag('i', '',
+              ['class' => $this->defaultImageClass]),
+              ['class' => 'mt-comment-img']);
+            return $this->html;
         }
 
         $this->html[] = Html::tag('div', Html::img(Url::toRoute([$this->image]), ['height' => '45px']),
