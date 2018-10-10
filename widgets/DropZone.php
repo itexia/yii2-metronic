@@ -109,12 +109,14 @@ class DropZone extends Widget
         if (count($this->existingFiles) > 0) {
             foreach ($this->existingFiles as $fileArray) {
                 $filename = $fileArray['filename'];
+                $filenameServer = $fileArray['filenameOnServer'];
+
                 $url = $fileArray['url'];
 
                 if ($url) {
                     $js .= '
                     // Create the mock file:
-                    var mockFile = { name: "' . $filename . '", size: 1 };
+                    var mockFile = { name: "' . $filename . '", servername: "' . $filenameServer . '", size: 1 };
                     
                     // add mockFile
                     ' . $this->id . '.files.push(mockFile); // TODO: needed?
