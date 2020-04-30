@@ -209,7 +209,7 @@ class ActiveForm extends \yii\bootstrap\ActiveForm
                         Html::addCssClass($rowOptions,
                           'col-md-offset-' . $offset);
                         Html::addCssClass($rowOptions,
-                          'col-md-' . 12 - $offset);
+                          'col-md-' . (12 - $offset));
                         $buttons = Html::tag('div', $buttons, $rowOptions);
                     }
                     break;

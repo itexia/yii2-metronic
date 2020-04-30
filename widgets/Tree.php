@@ -184,11 +184,11 @@ class Tree extends InputWidget
      */
     protected function pullAssignedItems()
     {
-        if (is_string($this->model{$this->attribute})) {
-            return explode(',', $this->model{$this->attribute});
+        if (is_string($this->model[$this->attribute])) {
+            return explode(',', $this->model[$this->attribute]);
         }
 
-        return (array)$this->model{$this->attribute};
+        return (array)$this->model[$this->attribute];
     }
 
     /**
