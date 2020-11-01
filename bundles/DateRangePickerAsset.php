@@ -15,13 +15,13 @@ class DateRangePickerAsset extends BaseAssetBundle
 
 
     public $js = [
-      'plugins/bootstrap-daterangepicker/moment.min.js',
-      'plugins/bootstrap-daterangepicker/daterangepicker.js',
+      'global/plugins/moment.min.js',
+      'global/plugins/bootstrap-daterangepicker/daterangepicker.js',
     ];
 
     public $css = [
-      'plugins/bootstrap-daterangepicker/daterangepicker-bs3.css',
-      'plugins/bootstrap-datetimepicker/css/datetimepicker.css',
+      'global/plugins/bootstrap-daterangepicker/daterangepicker.css',
+      'global/plugins/bootstrap-datetimepicker/css/datetimepicker.css',
     ];
 
     public $depends = [
